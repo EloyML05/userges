@@ -17,6 +17,7 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   lUsuarios: IUsuario[] = [];
   page: number = 1;
   maxPage: number = 0;
+  clicked: boolean = false;
 
   botonera: string[] = [];
 
@@ -36,6 +37,8 @@ export class UsuarioAdminRoutedComponent implements OnInit {
         this.maxPage = arrUsuario.totalPages;
         this.botonera = [];
         this.botonera = this.oBotoneraService.getbotonera(this.maxPage,this.page);
+        this.clicked=false;
+
       },
       error: (err) => {
         console.log(err);
@@ -50,6 +53,33 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   eliminar(oUsuario: IUsuario) {
     console.log('Borrar', oUsuario);
   }
+
+reordenar(colum: string){
+let orden = '';
+if (this.clicked == false) {
+  orden = 'asc';
+  this.clicked = true;
+}else{
+  orden = 'desc';
+  this.clicked = false;
+
+}
+
+
+
+
+  this.oUsuarioService.getReorderedPage(this.page-1,10,colum,orden).subscribe({
+    next: (arrUsuario: IPage<IUsuario>) => {
+      this.lUsuarios = arrUsuario.content;
+      this.maxPage = arrUsuario.totalPages;
+      this.botonera = [];
+      this.botonera = this.oBotoneraService.getbotonera(this.maxPage,this.page);
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
 
   goToPage(boton: number) {
     this.page = boton;

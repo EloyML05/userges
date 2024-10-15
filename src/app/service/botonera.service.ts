@@ -25,4 +25,7 @@ getbotonera(totalPages: number,page: number): string[] {
 
   return botonera;
 }
+
+
+
 }

@@ -32,11 +32,11 @@
       <table class="table table-responsive table-hover table-bordered  table-striped mt-5 p-5">
         <thead>
           <tr>
-            <th >ID</th>
-            <th>Nombre</th>
-            <th>Primer Apellido</th>
-            <th>Segundo Apellido</th>
-            <th>Correo</th>
+            <th (click)="reordenar('id')" >ID</th>
+            <th (click)="reordenar('nombre')">Nombre</th>
+            <th (click)="reordenar('apellido1')">Primer Apellido</th>
+            <th (click)="reordenar('apellido2')">Segundo Apellido</th>
+            <th (click)="reordenar('email')">Correo</th>
             <th>Acciones</th>
           </tr>
         </thead>

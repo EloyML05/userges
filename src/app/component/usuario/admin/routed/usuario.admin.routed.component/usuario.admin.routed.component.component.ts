@@ -18,6 +18,7 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   page: number = 1;
   maxPage: number = 0;
   clicked: boolean = false;
+  sice: number = 10;
 
   botonera: string[] = [];
 
@@ -31,14 +32,16 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   }
 
   getPage() {
-    this.oUsuarioService.getPage(this.page - 1, 10).subscribe({
+    this.oUsuarioService.getPage(this.page - 1, this.sice).subscribe({
       next: (arrUsuario: IPage<IUsuario>) => {
         this.lUsuarios = arrUsuario.content;
         this.maxPage = arrUsuario.totalPages;
         this.botonera = [];
-        this.botonera = this.oBotoneraService.getbotonera(this.maxPage,this.page);
-        this.clicked=false;
-
+        this.botonera = this.oBotoneraService.getbotonera(
+          this.maxPage,
+          this.page
+        );
+        this.clicked = false;
       },
       error: (err) => {
         console.log(err);
@@ -54,32 +57,33 @@ export class UsuarioAdminRoutedComponent implements OnInit {
     console.log('Borrar', oUsuario);
   }
 
-reordenar(colum: string){
-let orden = '';
-if (this.clicked == false) {
-  orden = 'asc';
-  this.clicked = true;
-}else{
-  orden = 'desc';
-  this.clicked = false;
+  reordenar(colum: string) {
+    let orden = '';
+    if (this.clicked == false) {
+      orden = 'asc';
+      this.clicked = true;
+    } else {
+      orden = 'desc';
+      this.clicked = false;
+    }
 
-}
-
-
-
-
-  this.oUsuarioService.getReorderedPage(this.page-1,10,colum,orden).subscribe({
-    next: (arrUsuario: IPage<IUsuario>) => {
-      this.lUsuarios = arrUsuario.content;
-      this.maxPage = arrUsuario.totalPages;
-      this.botonera = [];
-      this.botonera = this.oBotoneraService.getbotonera(this.maxPage,this.page);
-    },
-    error: (err) => {
-      console.log(err);
-    },
-  });
-}
+    this.oUsuarioService
+      .getReorderedPage(this.page - 1, this.sice, colum, orden)
+      .subscribe({
+        next: (arrUsuario: IPage<IUsuario>) => {
+          this.lUsuarios = arrUsuario.content;
+          this.maxPage = arrUsuario.totalPages;
+          this.botonera = [];
+          this.botonera = this.oBotoneraService.getbotonera(
+            this.maxPage,
+            this.page
+          );
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
 
   goToPage(boton: number) {
     this.page = boton;

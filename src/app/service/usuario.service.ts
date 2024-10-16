@@ -25,4 +25,8 @@ export class UsuarioService {
       'http://localhost:8085/usuario?page=' +page +'&size=' +size +'&sort=' +colum +',' +orden
     );
   }
+
+  delete(id: number): Observable<IUsuario> {
+    return this.oHttp.delete<IUsuario>('http://localhost:8085/usuario/' + id);
+  }
 }

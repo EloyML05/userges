@@ -50,11 +50,19 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   }
 
   editar(oUsuario: IUsuario) {
-    console.log('Editar', oUsuario);
+
+
   }
 
   eliminar(oUsuario: IUsuario) {
-    console.log('Borrar', oUsuario);
+    this.oUsuarioService.delete(oUsuario.id).subscribe({
+      next: () => {
+        this.getPage();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
   }
 
   reordenar(colum: string) {

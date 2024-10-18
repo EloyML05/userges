@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { IPage } from '../../../../../model/model.interface';
 import { FormsModule } from '@angular/forms';
 import { BotoneraService } from '../../../../../service/botonera.service';
+import { debounce, debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-usuario.admin.routed',
@@ -19,8 +20,10 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   maxPage: number = 0;
   clicked: boolean = false;
   sice: number = 10;
-
+  filter: string = '';
   botonera: string[] = [];
+  searchInput: Subject<string> = new Subject<string>();
+
 
   constructor(
     private oUsuarioService: UsuarioService,
@@ -29,6 +32,21 @@ export class UsuarioAdminRoutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
+
+    this.searchInput.pipe(debounceTime(500)).subscribe(() => {
+      this.oUsuarioService.getPageFilter(this.filter).subscribe({
+        next: (arrUsuario: IPage<IUsuario>) => {
+          this.lUsuarios = arrUsuario.content;
+          this.maxPage = arrUsuario.totalPages;
+          this.botonera = this.oBotoneraService.getbotonera(this.maxPage, this.page);
+          this.clicked = false;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    });
+
   }
 
   getPage() {
@@ -53,6 +71,10 @@ export class UsuarioAdminRoutedComponent implements OnInit {
 
 
   }
+
+filtrar(){
+  this.searchInput.next(this.filter);
+}
 
   eliminar(oUsuario: IUsuario) {
     this.oUsuarioService.delete(oUsuario.id).subscribe({

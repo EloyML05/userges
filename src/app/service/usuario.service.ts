@@ -29,4 +29,10 @@ export class UsuarioService {
   delete(id: number): Observable<IUsuario> {
     return this.oHttp.delete<IUsuario>('http://localhost:8085/usuario/' + id);
   }
+
+  getPageFilter(filter: string): Observable<IPage<IUsuario>> {
+    return this.oHttp.get<IPage<IUsuario>>(
+      'http://localhost:8085/usuario?filter=' + filter
+    );
+  }
 }

@@ -25,21 +25,35 @@
             <span class="page-link" (click)="goPrev()">Anterior</span>
           </li>
           <li class="page-item">
-            <select class="form-select" (click)="getPage()" [(ngModel)]="sice" aria-label="Default select example">
-              <option selected [value]="10">Seleciona cuantas filas deseas</option>
+            <select
+              class="form-select"
+              (click)="getPage()"
+              [(ngModel)]="sice"
+              aria-label="Default select example"
+            >
+              <option selected [value]="10">
+                Seleciona cuantas filas deseas
+              </option>
               <option [value]="10">10</option>
-              <option [value]=" 25">25</option>
+              <option [value]="25">25</option>
               <option [value]="50">50</option>
               <option [value]="100">100</option>
             </select>
           </li>
         </ul>
+        <u class="d-flex justify-content-center pagination" html>
+          <li class="page-item">
+            <input class="form-control-sm" type="text" placeholder="Filtrar" (keyup)="filtrar()" [(ngModel)]="filter" />
+          </li>
+        </u>
       </nav>
 
-      <table class="table table-responsive table-hover table-bordered  table-striped mt-5 p-5">
+      <table
+        class="table table-responsive table-hover table-bordered table-striped mt-5 p-5"
+      >
         <thead>
           <tr>
-            <th (click)="reordenar('id')" >ID</th>
+            <th (click)="reordenar('id')">ID</th>
             <th (click)="reordenar('nombre')">Nombre</th>
             <th (click)="reordenar('apellido1')">Primer Apellido</th>
             <th (click)="reordenar('apellido2')">Segundo Apellido</th>
@@ -57,37 +71,59 @@
             <td>{{ usuario.apellido2 }}</td>
             <td>{{ usuario.email }}</td>
             <td class="text-center">
-              <button type="button" class="btn btn-primary mx-2" data-toggle="modal" [attr.data-target]="'#' + $index">
-              Editar              
-          </button>
-          <div class="modal fade" id={{$index}} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+              <button
+                type="button"
+                class="btn btn-primary mx-2"
+                data-toggle="modal"
+                [attr.data-target]="'#' + $index"
+              >
+                Editar
+              </button>
+              <div
+                class="modal fade"
+                id="{{ $index }}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        Modal title
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">...</div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
               <button class="btn btn-danger" (click)="eliminar(usuario)">
                 Eliminar
               </button>
             </td>
           </tr>
           }
-         
-          
-          
         </tbody>
       </table>
     </div>

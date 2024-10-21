@@ -70,12 +70,12 @@
 
         <tbody>
           @for (usuario of lUsuarios; track $index;) {
-          <tr  class="pointer">
-            <td (click)="goToView($event, usuario.id)">{{ usuario.id }}</td>
-            <td (click)="goToView($event, usuario.id)">{{ usuario.nombre }}</td>
-            <td (click)="goToView($event, usuario.id)">{{ usuario.apellido1 }}</td>
-            <td (click)="goToView($event, usuario.id)">{{ usuario.apellido2 }}</td>
-            <td (click)="goToView($event, usuario.id)">{{ usuario.email }}</td>
+          <tr  >
+            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.id }}</td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.nombre }}</td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.apellido1 }}</td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.apellido2 }}</td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.email }}</td>
             <td class="text-center">
               <a class="btn btn-success" href="/admin/usuario/view/{{usuario.id}}" class="btn btn-success ">Ver</a>
               <a class="btn btn-primary" href="/admin/usuario/edit/{{usuario.id}}" class="btn btn-primary mx-2">Editar</a>

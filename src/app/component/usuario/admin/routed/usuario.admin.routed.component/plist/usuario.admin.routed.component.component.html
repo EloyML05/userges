@@ -78,9 +78,9 @@
             <td>{{ usuario.email }}</td>
             <td class="text-center">
               <button type="button" class="btn btn-primary mx-2">Editar</button>
-              <button class="btn btn-danger" (click)="eliminar(usuario)">
+              <a class="btn btn-danger" href="/admin/usuario/remove/{{usuario.id}}">
                 Eliminar
-              </button>
+              </a>
             </td>
           </tr>
           } @empty {

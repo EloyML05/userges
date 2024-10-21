@@ -15,6 +15,10 @@ export class UsuarioService {
       'http://localhost:8085' + '/usuario?page=' + page + '&size=' + size
     );
   }
+
+  getUser(id: number): Observable<IUsuario> {
+    return this.oHttp.get<IUsuario>('http://localhost:8085/usuario/' + id);
+  }
   getReorderedPage(
     page: number,
     size: number,

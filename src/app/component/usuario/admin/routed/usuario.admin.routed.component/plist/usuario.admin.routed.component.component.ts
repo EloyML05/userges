@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../../../../service/usuario.service';
-import { IUsuario } from '../../../../../model/usuario.interface';
+import { UsuarioService } from '../../../../../../service/usuario.service';
+import { IUsuario } from '../../../../../../model/usuario.interface';
 import { CommonModule } from '@angular/common';
-import { IPage } from '../../../../../model/model.interface';
+import { IPage } from '../../../../../../model/model.interface';
 import { FormsModule } from '@angular/forms';
-import { BotoneraService } from '../../../../../service/botonera.service';
+import { BotoneraService } from '../../../../../../service/botonera.service';
 import { debounce, debounceTime, Subject } from 'rxjs';
 
 @Component({
@@ -24,7 +24,6 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   botonera: string[] = [];
   searchInput: Subject<string> = new Subject<string>();
 
-
   constructor(
     private oUsuarioService: UsuarioService,
     private oBotoneraService: BotoneraService
@@ -38,7 +37,10 @@ export class UsuarioAdminRoutedComponent implements OnInit {
         next: (arrUsuario: IPage<IUsuario>) => {
           this.lUsuarios = arrUsuario.content;
           this.maxPage = arrUsuario.totalPages;
-          this.botonera = this.oBotoneraService.getbotonera(this.maxPage, this.page);
+          this.botonera = this.oBotoneraService.getbotonera(
+            this.maxPage,
+            this.page
+          );
           this.clicked = false;
         },
         error: (err) => {
@@ -46,7 +48,6 @@ export class UsuarioAdminRoutedComponent implements OnInit {
         },
       });
     });
-
   }
 
   getPage() {
@@ -67,24 +68,10 @@ export class UsuarioAdminRoutedComponent implements OnInit {
     });
   }
 
-  editar(oUsuario: IUsuario) {
+  editar(oUsuario: IUsuario) {}
 
-
-  }
-
-filtrar(){
-  this.searchInput.next(this.filter);
-}
-
-  eliminar(oUsuario: IUsuario) {
-    this.oUsuarioService.delete(oUsuario.id).subscribe({
-      next: () => {
-        this.getPage();
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    })
+  filtrar() {
+    this.searchInput.next(this.filter);
   }
 
   reordenar(colum: string) {

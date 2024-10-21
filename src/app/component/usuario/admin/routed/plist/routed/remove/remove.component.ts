@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UsuarioService } from '../../../../../../service/usuario.service';
+import { UsuarioService } from '../../../../../../../service/usuario.service';
 import { ActivatedRoute } from '@angular/router';
-import { IUsuario } from '../../../../../../model/usuario.interface';
+import { IUsuario } from '../../../../../../../model/usuario.interface';
 
 @Component({
   selector: 'app-remove',

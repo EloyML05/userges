@@ -26,12 +26,25 @@ export class UsuarioService {
     orden: string
   ): Observable<IPage<IUsuario>> {
     return this.oHttp.get<IPage<IUsuario>>(
-      'http://localhost:8085/usuario?page=' +page +'&size=' +size +'&sort=' +colum +',' +orden
+      'http://localhost:8085/usuario?page=' +
+        page +
+        '&size=' +
+        size +
+        '&sort=' +
+        colum +
+        ',' +
+        orden
     );
   }
 
   delete(id: number): Observable<IUsuario> {
     return this.oHttp.delete<IUsuario>('http://localhost:8085/usuario/' + id);
+  }
+  update(oUsuario: IUsuario): Observable<IUsuario> {
+    return this.oHttp.put<IUsuario>(
+      'http://localhost:8085/usuario/',
+      oUsuario
+    );
   }
 
   getPageFilter(filter: string): Observable<IPage<IUsuario>> {

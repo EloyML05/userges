@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-6 mx-auto">
+          <h2>Actualizar el usuario</h2>
+          <label for="" class="form-label  mt-2"> ID</label>
+          <input type="text" class="form-control" readonly [(ngModel)]="IUsuario.id" >
+          <label for="" class="form-label mt-2"> Nombre</label>
+          <input type="text" class="form-control "   [(ngModel)]="IUsuario.nombre" >
+          <label for="" class="form-label mt-2"> Apellido1</label>
+          <input type="text" class="form-control "  [(ngModel)]="IUsuario.apellido1" >
+          <label for="" class="form-label mt-2"> Apellido2</label>
+          <input type="text" class="form-control "  [(ngModel)]="IUsuario.apellido2" >
+          <label for="" class="form-label mt-2"> Email</label>
+          <input type="text" class="form-control "  [(ngModel)]="IUsuario.email" >
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-6  mx-auto d-flex justify-content-between">
+          <a class="btn btn-secondary mt-3" href="/admin/usuario/plist">Cancelar</a>
+          <div>
+          <a class="btn btn-primary mx-2 mt-3" href="/admin/usuario/plist">Volver</a>
+          <a class="btn btn-success mt-3" (click)="update()">Actualizar</a>
+      </div>
+      </div>
+  </div>
+</div>

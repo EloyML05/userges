@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../../../../../service/usuario.service';
-import { IUsuario } from '../../../../../../model/usuario.interface';
+import { UsuarioService } from '../../../../../service/usuario.service';
+import { IUsuario } from '../../../../../model/usuario.interface';
 import { CommonModule } from '@angular/common';
-import { IPage } from '../../../../../../model/model.interface';
+import { IPage } from '../../../../../model/model.interface';
 import { FormsModule } from '@angular/forms';
-import { BotoneraService } from '../../../../../../service/botonera.service';
+import { BotoneraService } from '../../../../../service/botonera.service';
 import { debounce, debounceTime, Subject } from 'rxjs';
 
 @Component({
@@ -53,6 +53,10 @@ export class UsuarioAdminRoutedComponent implements OnInit {
   getPage() {
     this.oUsuarioService.getPage(this.page - 1, this.sice).subscribe({
       next: (arrUsuario: IPage<IUsuario>) => {
+        if (arrUsuario.content.length == 0) {
+          this.page = arrUsuario.totalPages;
+          this.getPage();
+        }
         this.lUsuarios = arrUsuario.content;
         this.maxPage = arrUsuario.totalPages;
         this.botonera = [];
@@ -67,8 +71,6 @@ export class UsuarioAdminRoutedComponent implements OnInit {
       },
     });
   }
-
-  editar(oUsuario: IUsuario) {}
 
   filtrar() {
     this.searchInput.next(this.filter);
@@ -100,6 +102,12 @@ export class UsuarioAdminRoutedComponent implements OnInit {
           console.log(err);
         },
       });
+  }
+
+  goToView(event: Event, id: number) {
+    event.preventDefault();
+    location.href = '/admin/usuario/view/' + id;
+
   }
 
   goToPage(boton: number) {

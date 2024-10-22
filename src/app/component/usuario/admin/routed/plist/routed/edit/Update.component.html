@@ -19,7 +19,7 @@
             <a class="btn btn-secondary mt-3" href="/admin/usuario/plist">Cancelar</a>
             <div>
             <a class="btn btn-primary mx-2 mt-3" href="/admin/usuario/plist">Volver</a>
-            <button class="btn btn-success mt-3" type="submit">Actualizar</button>
+            <button class="btn btn-success mt-3" [disabled]="!profileForm.valid" type="submit">Actualizar</button>
         </div>
         </div>
     </div>

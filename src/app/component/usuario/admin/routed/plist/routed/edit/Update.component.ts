@@ -53,10 +53,8 @@ export class UpdateComponent implements OnInit {
           apellido1: new FormControl(this.IUsuario?.apellido1, [
             Validators.required,
           ]),
-          apellido2: new FormControl(this.IUsuario?.apellido2, [
-            Validators.required,
-          ]),
-          email: new FormControl(this.IUsuario?.email, [Validators.required]),
+          apellido2: new FormControl(this.IUsuario?.apellido2),
+          email: new FormControl(this.IUsuario?.email, [Validators.required, Validators.email]),
         });
       },
       error: (err) => {
@@ -67,7 +65,7 @@ export class UpdateComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm?.invalid) {
-      alert('Formulario invalido');
+      alert ('Faltan campos por rellenar');
       return;
 
     }

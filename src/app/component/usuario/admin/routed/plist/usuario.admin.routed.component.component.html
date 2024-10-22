@@ -26,7 +26,7 @@
           </li>
           <li class="page-item">
             <select
-              class="form-select "
+              class="form-select"
               (click)="getPage()"
               [(ngModel)]="sice"
               aria-label="Default select example"
@@ -51,33 +51,83 @@
           </li>
         </ul>
       </nav>
-
+      <a href="/admin/usuario/new" class="btn btn-primary">
+        Crear nuevo usuario</a
+      >
       <table
-        class="table table-responsive table-hover table-bordered table-striped mt-5 p-5"
+        class="table table-responsive table-hover table-bordered table-striped mt-2 p-5"
       >
         <thead>
           <tr>
-            <th class="text-center text-bg-dark pointer" (click)="reordenar('id')">ID</th>
-            <th class="text-center text-bg-dark pointer" (click)="reordenar('nombre')">Nombre</th>
-            <th class="text-center text-bg-dark pointer" (click)="reordenar('apellido1')">Primer Apellido</th>
-            <th class="text-center text-bg-dark pointer" (click)="reordenar('apellido2')">Segundo Apellido</th>
-            <th class="text-center text-bg-dark pointer" (click)="reordenar('email')">Correo</th>
-            <th class="text-center text-bg-dark pointer" >Acciones</th>
+            <th
+              class="text-center text-bg-dark pointer"
+              (click)="reordenar('id')"
+            >
+              ID
+            </th>
+            <th
+              class="text-center text-bg-dark pointer"
+              (click)="reordenar('nombre')"
+            >
+              Nombre
+            </th>
+            <th
+              class="text-center text-bg-dark pointer"
+              (click)="reordenar('apellido1')"
+            >
+              Primer Apellido
+            </th>
+            <th
+              class="text-center text-bg-dark pointer"
+              (click)="reordenar('apellido2')"
+            >
+              Segundo Apellido
+            </th>
+            <th
+              class="text-center text-bg-dark pointer"
+              (click)="reordenar('email')"
+            >
+              Correo
+            </th>
+            <th class="text-center text-bg-dark pointer">Acciones</th>
           </tr>
         </thead>
 
         <tbody>
           @for (usuario of lUsuarios; track $index;) {
-          <tr  >
-            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.id }}</td>
-            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.nombre }}</td>
-            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.apellido1 }}</td>
-            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.apellido2 }}</td>
-            <td class="pointer" (click)="goToView($event, usuario.id)">{{ usuario.email }}</td>
+          <tr>
+            <td class="pointer" (click)="goToView($event, usuario.id)">
+              {{ usuario.id }}
+            </td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">
+              {{ usuario.nombre }}
+            </td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">
+              {{ usuario.apellido1 }}
+            </td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">
+              {{ usuario.apellido2 }}
+            </td>
+            <td class="pointer" (click)="goToView($event, usuario.id)">
+              {{ usuario.email }}
+            </td>
             <td class="text-center">
-              <a class="btn btn-success" href="/admin/usuario/view/{{usuario.id}}" class="btn btn-success ">Ver</a>
-              <a class="btn btn-primary" href="/admin/usuario/edit/{{usuario.id}}" class="btn btn-primary mx-2">Editar</a>
-              <a class="btn btn-danger" href="/admin/usuario/remove/{{usuario.id}}">
+              <a
+                class="btn btn-success"
+                href="/admin/usuario/view/{{ usuario.id }}"
+                class="btn btn-success"
+                >Ver</a
+              >
+              <a
+                class="btn btn-primary"
+                href="/admin/usuario/edit/{{ usuario.id }}"
+                class="btn btn-primary mx-2"
+                >Editar</a
+              >
+              <a
+                class="btn btn-danger"
+                href="/admin/usuario/remove/{{ usuario.id }}"
+              >
                 Eliminar
               </a>
             </td>

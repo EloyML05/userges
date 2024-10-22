@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUsuario } from '../model/usuario.interface';
+import { IUsuario, NewIUsuario } from '../model/usuario.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { IPage } from '../model/model.interface';
@@ -51,5 +51,9 @@ export class UsuarioService {
     return this.oHttp.get<IPage<IUsuario>>(
       'http://localhost:8085/usuario?filter=' + filter
     );
+  }
+
+  create(oUsuario: NewIUsuario): Observable<NewIUsuario> {
+    return this.oHttp.post<IUsuario>('http://localhost:8085/usuario', oUsuario);
   }
 }

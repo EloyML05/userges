@@ -10,13 +10,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-Update',
   templateUrl: './Update.component.html',
   styleUrls: ['./Update.component.css'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 })
 export class UpdateComponent implements OnInit {
   id: number = 0;
@@ -28,7 +30,7 @@ export class UpdateComponent implements OnInit {
     email: '',
   };
 
-  profileForm: FormGroup = new FormGroup({
+  usuarioForm: FormGroup = new FormGroup({
     id: new FormControl(),
     nombre: new FormControl(),
     apellido1: new FormControl(),
@@ -47,14 +49,23 @@ export class UpdateComponent implements OnInit {
     this.oUsuarioService.getUser(this.id).subscribe({
       next: (data) => {
         this.IUsuario = data;
-        this.profileForm = new FormGroup({
+        this.usuarioForm = new FormGroup({
           id: new FormControl(this.IUsuario?.id, [Validators.required]),
-          nombre: new FormControl(this.IUsuario?.nombre, [Validators.required]),
+          nombre: new FormControl(this.IUsuario?.nombre, [
+            Validators.required,
+            Validators.min(3),
+            Validators.max(50),
+          ]),
           apellido1: new FormControl(this.IUsuario?.apellido1, [
             Validators.required,
+            Validators.min(3),
+            Validators.max(50),
           ]),
           apellido2: new FormControl(this.IUsuario?.apellido2),
-          email: new FormControl(this.IUsuario?.email, [Validators.required, Validators.email]),
+          email: new FormControl(this.IUsuario?.email, [
+            Validators.required,
+            Validators.email,
+          ]),
         });
       },
       error: (err) => {
@@ -64,16 +75,15 @@ export class UpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.profileForm?.invalid) {
-      alert ('Faltan campos por rellenar');
+    if (this.usuarioForm?.invalid) {
+      alert('Faltan campos por rellenar');
       return;
-
     }
-    this.IUsuario.id = this.profileForm?.value.id;
-    this.IUsuario.nombre = this.profileForm?.value.nombre;
-    this.IUsuario.apellido1 = this.profileForm?.value.apellido1;
-    this.IUsuario.apellido2 = this.profileForm?.value.apellido2;
-    this.IUsuario.email = this.profileForm?.value.email;
+    this.IUsuario.id = this.usuarioForm?.value.id;
+    this.IUsuario.nombre = this.usuarioForm?.value.nombre;
+    this.IUsuario.apellido1 = this.usuarioForm?.value.apellido1;
+    this.IUsuario.apellido2 = this.usuarioForm?.value.apellido2;
+    this.IUsuario.email = this.usuarioForm?.value.email;
 
     this.update();
   }

@@ -66,6 +66,11 @@ export class UpdateComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.profileForm?.invalid) {
+      alert('Formulario invalido');
+      return;
+
+    }
     this.IUsuario.id = this.profileForm?.value.id;
     this.IUsuario.nombre = this.profileForm?.value.nombre;
     this.IUsuario.apellido1 = this.profileForm?.value.apellido1;

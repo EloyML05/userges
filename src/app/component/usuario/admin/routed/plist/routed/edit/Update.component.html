@@ -5,7 +5,7 @@
        <h2>¿Deseas eliminar el usuario?</h2>
        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate>
        <label for="" class="form-label  mt-2"> ID</label>
-       <input type="text" class="form-control"  formControlName="id" >
+       <input type="text"  class="form-control" readonly  formControlName="id" >
        <label for="" class="form-label mt-2"> Nombre</label>
        <input type="text" class="form-control "   formControlName="nombre" >
        <label for="" class="form-label mt-2"> Apellido1</label>
